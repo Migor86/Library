@@ -147,6 +147,7 @@ public class CommandManager
         Book book = bookStorage.findById(bookId)
                                .orElseThrow(() -> new RuntimeException(MessageFormat.format(BOOK_NOT_FOUND, bookId)));
 
+        // TODO: по хорошему, наверное, надо как-то обеспечить атомарность операции
         bookStorage.remove(book);
         user.addBook(book);
 
@@ -167,6 +168,7 @@ public class CommandManager
         Book book = user.findBookById(bookId)
                         .orElseThrow(() -> new RuntimeException(MessageFormat.format(USERS_BOOK_NOT_FOUND, userId, bookId)));
 
+        // TODO: по хорошему, наверное, надо как-то обеспечить атомарность операции
         user.removeBook(book);
         bookStorage.add(book);
     }
